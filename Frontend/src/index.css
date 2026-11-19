@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+.category-marquee {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: hidden;
+}
+
+.category-marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.category-marquee-track {
+  width: max-content;
+}
