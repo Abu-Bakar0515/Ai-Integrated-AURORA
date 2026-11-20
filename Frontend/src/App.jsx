@@ -1,11 +1,14 @@
 import AppRouter from "./routes/appRoutes"
+import { CartProvider } from "./context/CartContext";
+import ChatAssistant from "./components/ChatAssistant";
 
 
 function App() {
   return (
-    <div>
-      <AppRouter/>
-    </div>
+    <CartProvider>
+      <AppRouter />
+      <ChatAssistant />
+    </CartProvider>
   )
 }
 

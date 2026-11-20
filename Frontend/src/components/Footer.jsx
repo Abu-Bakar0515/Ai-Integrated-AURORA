@@ -36,9 +36,9 @@ function Footer() {
 
   return (
     <footer className="bg-[#29241f] text-[#F5F1E9]">
-      <div className="w-full px-4 py-16 sm:px-6 sm:py-20 md:px-8">
+      <div className="mx-auto w-full max-w-[1440px] px-4 py-12 sm:px-6 sm:py-14 lg:px-10">
         <motion.div
-          className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12"
           variants={footerContentVariants}
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView={shouldReduceMotion ? undefined : "visible"}
@@ -49,20 +49,20 @@ function Footer() {
               to="/"
               aria-label="AURORA home"
               whileHover={shouldReduceMotion ? undefined : { opacity: 0.75 }}
-              className="font-serif text-4xl tracking-[0.16em]"
+              className="font-serif text-2xl tracking-[0.16em]"
             >
               AURORA
             </MotionLink>
-            <p className="mt-5 max-w-sm text-2xl leading-relaxed text-[#d0c8bd]">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#d0c8bd]">
               Thoughtfully curated fashion for everyday elegance.
             </p>
           </motion.div>
 
           <motion.nav aria-label="Explore" variants={footerItemVariants}>
-            <h2 className="text-2xl font-medium uppercase tracking-[0.2em] text-[#d0c8bd]">
+            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-[#d0c8bd]">
               Explore
             </h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-2">
               {exploreLinks.map((link) => (
                 <li key={link.label}>
                   <MotionLink
@@ -70,7 +70,7 @@ function Footer() {
                     whileHover={
                       shouldReduceMotion ? undefined : { color: "#ffffff" }
                     }
-                    className="text-2xl"
+                    className="text-sm text-[#F5F1E9]/90"
                   >
                     {link.label}
                   </MotionLink>
@@ -80,10 +80,10 @@ function Footer() {
           </motion.nav>
 
           <motion.nav aria-label="Information" variants={footerItemVariants}>
-            <h2 className="text-2xl font-medium uppercase tracking-[0.2em] text-[#d0c8bd]">
+            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-[#d0c8bd]">
               Information
             </h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-2">
               {informationLinks.map((link) => (
                 <li key={link.label}>
                   <MotionLink
@@ -91,7 +91,7 @@ function Footer() {
                     whileHover={
                       shouldReduceMotion ? undefined : { color: "#ffffff" }
                     }
-                    className="text-2xl"
+                    className="text-sm text-[#F5F1E9]/90"
                   >
                     {link.label}
                   </MotionLink>
@@ -102,7 +102,7 @@ function Footer() {
         </motion.div>
 
         <motion.div
-          className="mt-14 flex flex-col gap-3 border-t border-white/15 pt-6 text-2xl text-[#d0c8bd] sm:flex-row sm:items-center sm:justify-between"
+          className="mt-10 flex flex-col gap-2 border-t border-white/15 pt-5 text-xs text-[#d0c8bd] sm:flex-row sm:items-center sm:justify-between"
           variants={footerItemVariants}
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView={shouldReduceMotion ? undefined : "visible"}

@@ -24,7 +24,7 @@ function Hero() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative isolate flex h-[calc(100vh-6rem-90px-2rem-1px)] w-full items-end overflow-hidden bg-[#5b5048] md:h-[calc(100vh-7rem-90px-2rem-1px)] xl:h-[calc(100vh-8rem-90px-2rem-1px)]">
+    <section className="relative isolate flex h-[min(72vh,640px)] min-h-[420px] w-full items-end overflow-hidden bg-[#5b5048] sm:min-h-[480px] lg:h-[min(78vh,720px)]">
       <motion.img
         src={heroImage}
         alt="Woman wearing a beige coat"
@@ -42,28 +42,28 @@ function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
       />
 
-      <div className="relative z-10 w-full px-6 pb-12 text-white sm:px-10 sm:pb-16 md:px-12 md:pb-20 lg:px-20 lg:pb-24 xl:px-24">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-8 text-white sm:px-8 sm:pb-12 lg:px-10 lg:pb-14">
         <motion.div
-          className="max-w-4xl"
+          className="max-w-2xl"
           variants={heroContentVariants}
           initial={shouldReduceMotion ? false : "hidden"}
           animate={shouldReduceMotion ? undefined : "visible"}
         >
           <motion.p
             variants={heroItemVariants}
-            className="text-2xl font-medium uppercase tracking-[0.24em] sm:text-xl"
+            className="text-[0.7rem] font-medium uppercase tracking-[0.28em] sm:text-xs"
           >
             New Collection
           </motion.p>
           <motion.h1
             variants={heroItemVariants}
-            className="mt-5 font-serif text-[3.5rem] leading-[1.02] sm:text-[4.25rem] md:text-[5.5rem] lg:text-[7.5rem] xl:text-[9rem]"
+            className="mt-3 font-serif text-[2.35rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-7xl"
           >
             STYLE THAT SPEAKS
           </motion.h1>
           <motion.p
             variants={heroItemVariants}
-            className="mt-6 max-w-xl text-2xl leading-relaxed text-white/90 sm:text-2xl md:text-[1.875rem]"
+            className="mt-4 max-w-md text-sm leading-relaxed text-white/90 sm:text-base"
           >
             Discover timeless pieces designed for everyday elegance.
           </motion.p>
@@ -74,6 +74,7 @@ function Hero() {
               shouldReduceMotion
                 ? undefined
                 : {
+                    scale: 1.05,
                     y: -3,
                     backgroundColor: "#F5F1E9",
                     boxShadow:
@@ -82,7 +83,7 @@ function Hero() {
             }
             whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mt-9 inline-flex min-h-20 items-center justify-center bg-white px-20 py-7 text-3xl font-medium uppercase tracking-[0.18em] text-[#29241f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:mt-11 sm:px-16"
+            className="mt-6 inline-flex items-center justify-center bg-white px-7 py-3 text-xs font-medium uppercase tracking-[0.18em] text-[#29241f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:mt-8 sm:px-8"
           >
             Shop Now
           </MotionLink>

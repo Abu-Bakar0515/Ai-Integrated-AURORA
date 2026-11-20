@@ -8,6 +8,7 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/cartState";
 
 const MotionLink = motion.create(Link);
 
@@ -22,6 +23,7 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeNavigationLink, setActiveNavigationLink] = useState(null);
   const shouldReduceMotion = useReducedMotion();
+  const { cartCount } = useCart();
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -32,12 +34,12 @@ function Navbar() {
         animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="mx-auto grid min-h-[6rem] w-full max-w-none grid-cols-[1fr_auto] items-center px-4 sm:px-6 md:min-h-[7rem] md:px-8 lg:px-8 xl:min-h-[8rem] xl:grid-cols-[1fr_auto_1fr]">
+        <div className="mx-auto grid min-h-16 w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-4 sm:px-6 md:min-h-[4.5rem] lg:px-10 xl:grid-cols-[1fr_auto_1fr]">
           <MotionLink
             to="/"
             onClick={closeMenu}
-            className="justify-self-start font-serif text-[2rem] font-medium tracking-[0.18em] text-[#29241f] sm:text-[2.1rem] md:text-[2.35rem] lg:text-[2.5rem] xl:text-[2.75rem]"
-            aria-label="ARORA home"
+            className="justify-self-start font-serif text-xl font-medium tracking-[0.16em] text-[#29241f] sm:text-2xl"
+            aria-label="AURORA home"
             whileHover={shouldReduceMotion ? undefined : { opacity: 0.78 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
@@ -46,7 +48,7 @@ function Navbar() {
 
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-10 xl:flex xl:gap-16"
+            className="hidden items-center gap-8 lg:flex xl:gap-12"
           >
             {navigationLinks.map(({ label, to }) => (
               <motion.div
@@ -70,7 +72,7 @@ function Navbar() {
                     duration: shouldReduceMotion ? 0 : 0.2,
                     ease: "easeOut",
                   }}
-                  className="block py-2 text-[1.3rem] font-medium uppercase tracking-[0.17em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#514a42] xl:text-[1.5rem]"
+                  className="block py-2 text-xs font-medium uppercase tracking-[0.18em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#514a42]"
                 >
                   {label}
                 </MotionLink>
@@ -91,7 +93,7 @@ function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center justify-self-end gap-4 text-[#342d25] sm:gap-5 lg:gap-7 xl:gap-8">
+          <div className="flex items-center justify-self-end gap-3 text-[#342d25] sm:gap-4">
             <MotionLink
               to="/search"
               aria-label="Search"
@@ -100,17 +102,29 @@ function Navbar() {
               whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <Search aria-hidden="true" size={36} strokeWidth={1.5} />
+              <Search aria-hidden="true" size={20} strokeWidth={1.5} />
             </MotionLink>
             <MotionLink
               to="/cart"
-              aria-label="Shopping bag"
-              className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#514a42]"
+              aria-label={`Shopping bag${
+                cartCount
+                  ? `, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
+                  : ""
+              }`}
+              className="relative inline-flex focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#514a42]"
               whileHover={shouldReduceMotion ? undefined : { scale: 1.08, opacity: 0.6 }}
               whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <ShoppingBag aria-hidden="true" size={36} strokeWidth={1.5} />
+              <ShoppingBag aria-hidden="true" size={20} strokeWidth={1.5} />
+              {cartCount > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#29241f] px-1 text-[0.58rem] text-white"
+                >
+                  {cartCount}
+                </span>
+              )}
             </MotionLink>
             <MotionLink
               to="/account"
@@ -120,7 +134,7 @@ function Navbar() {
               whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <UserRound aria-hidden="true" size={36} strokeWidth={1.5} />
+              <UserRound aria-hidden="true" size={20} strokeWidth={1.5} />
             </MotionLink>
             <motion.button
               type="button"
@@ -128,7 +142,7 @@ function Navbar() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
-              className="xl:hidden"
+              className="lg:hidden"
               whileTap={shouldReduceMotion ? undefined : { scale: 0.94 }}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -141,7 +155,7 @@ function Navbar() {
                     transition={{ duration: shouldReduceMotion ? 0 : 0.18 }}
                     className="block"
                   >
-                    <X aria-hidden="true" size={32} strokeWidth={1.5} />
+                    <X aria-hidden="true" size={22} strokeWidth={1.5} />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -152,7 +166,7 @@ function Navbar() {
                     transition={{ duration: shouldReduceMotion ? 0 : 0.18 }}
                     className="block"
                   >
-                    <Menu aria-hidden="true" size={32} strokeWidth={1.5} />
+                    <Menu aria-hidden="true" size={22} strokeWidth={1.5} />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -173,25 +187,49 @@ function Navbar() {
               duration: shouldReduceMotion ? 0 : 0.25,
               ease: "easeOut",
             }}
-            className="overflow-hidden border-t border-[#342d25]/10 px-5 py-5 xl:hidden"
+            className="overflow-hidden border-t border-[#342d25]/10 px-5 py-4 lg:hidden"
           >
             <ul className="mx-auto flex w-full max-w-none flex-col gap-1">
               {navigationLinks.map(({ label, to }) => (
                 <li key={label}>
-                  <MotionLink
-                    to={to}
-                    onClick={closeMenu}
-                    whileHover={
-                      shouldReduceMotion
-                        ? undefined
-                        : { color: "#1f1b17", x: 2 }
-                    }
-                    whileFocus={shouldReduceMotion ? undefined : { color: "#1f1b17" }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="block py-3 text-lg font-medium uppercase tracking-[0.17em] text-[#514a42]"
+                  <motion.div
+                    className="relative w-fit"
+                    onMouseEnter={() => setActiveNavigationLink(label)}
+                    onMouseLeave={() => setActiveNavigationLink(null)}
                   >
-                    {label}
-                  </MotionLink>
+                    <MotionLink
+                      to={to}
+                      onClick={closeMenu}
+                      onFocus={() => setActiveNavigationLink(label)}
+                      onBlur={() => setActiveNavigationLink(null)}
+                      whileHover={
+                        shouldReduceMotion
+                          ? undefined
+                          : { color: "#1f1b17", x: 2 }
+                      }
+                      whileFocus={
+                        shouldReduceMotion ? undefined : { color: "#1f1b17" }
+                      }
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="block py-2.5 text-sm font-medium uppercase tracking-[0.16em] text-[#514a42]"
+                    >
+                      {label}
+                    </MotionLink>
+                    <motion.span
+                      animate={{
+                        scaleX:
+                          !shouldReduceMotion &&
+                          activeNavigationLink === label
+                            ? 1
+                            : 0,
+                      }}
+                      transition={{
+                        duration: shouldReduceMotion ? 0 : 0.25,
+                        ease: "easeOut",
+                      }}
+                      className="absolute inset-x-0 bottom-0 h-px origin-left bg-[#514a42]"
+                    />
+                  </motion.div>
                 </li>
               ))}
             </ul>
